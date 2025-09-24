@@ -1,0 +1,16 @@
+POST http://localhost:4001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "bateman",
+  "password": "secret123"
+}
+
+### Login (kopiera token från svaret)
+POST http://localhost:4001/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "bateman",
+  "password": "secret123"
+}
