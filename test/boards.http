@@ -1,3 +1,6 @@
 ### Boards 
 GET http://localhost:4001/api/boards
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYmF0ZW1hbiIsImJvYXJkSWRzIjpbM10sImlhdCI6MTc1ODcxMjYyMCwiZXhwIjoxNzU5MzE3NDIwfQ.PJDtnNJcOnwTe1IUJXJVaQE9dhRLpggDeKc6AsPCFCY
+###
+GET http://localhost:4000/api/notes?boardId=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYmF0ZW1hbiIsImJvYXJkSWRzIjpbM10sImlhdCI6MTc1ODcxMjYyMCwiZXhwIjoxNzU5MzE3NDIwfQ.PJDtnNJcOnwTe1IUJXJVaQE9dhRLpggDeKc6AsPCFCY

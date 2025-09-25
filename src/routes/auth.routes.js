@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
     const user = await prisma.user.create({ data: { username, passwordHash } });
 
     // Skapar en defaultboard 
-    const board = await prisma.board.create({ data: { title: `${username}'s first board` } });
+    const board = await prisma.board.create({ data: { title: `${username}` } });
     await prisma.membership.create({ data: { userId: user.id, boardId: board.id } });
 
     return res.status(201).json({ id: user.id, username: user.username });
