@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../db.js";
-import { signToken } from "../utils/jwt.js";
+import jwt from "jsonwebtoken";
 import { Router } from "express";
 
 
