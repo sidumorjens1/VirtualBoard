@@ -4,7 +4,7 @@ import { requireAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// GET /api/boards
+// hänta api boards
 router.get("/", requireAuth, async (req, res) => {
   try {
     const userId = req.user.userId;

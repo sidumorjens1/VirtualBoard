@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
   const passwordHash = await bcrypt.hash(password, ROUNDS);
   const user = await prisma.user.create({ data: { username, passwordHash } });
 
-  const board = await prisma.board.create({ data: { title: `${username}'s Board` } });
+  const board = await prisma.board.create({ data: { title: `${username}` } });
   await prisma.membership.create({ data: { userId: user.id, boardId: board.id, role: "owner" } });
 
   return res.status(201).json({ ok: true });
