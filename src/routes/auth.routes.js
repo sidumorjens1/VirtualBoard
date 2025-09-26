@@ -2,6 +2,8 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../db.js";
 import { signToken } from "../utils/jwt.js";
+import { Router } from "express";
+
 
 const router = Router();
 const ROUNDS = parseInt(process.env.BCRYPT_ROUNDS || "12", 10);
