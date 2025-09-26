@@ -14,18 +14,14 @@ const FRONTEND_ORIGIN = RAW.replace(/\/$/, "");
 
 app.use(
   cors({
-    origin(origin, cb) {
-      if (!origin || FRONTEND_ORIGIN === "*") return cb(null, true);
-      const norm = origin.replace(/\/$/, "");
-      if (norm === FRONTEND_ORIGIN) return cb(null, true);
-      return cb(new Error("CORS not allowed"), false);
-    },
+    origin: FRONTEND_ORIGIN === "*" ? true : FRONTEND_ORIGIN,
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 204,
     credentials: false,
   })
 );
+
 
 app.use(express.json());
 
