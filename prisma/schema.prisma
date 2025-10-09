@@ -1,41 +1,55 @@
 generator client {
-provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
-
 
 datasource db {
-provider = "postgresql"
-url = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
-
 
 model User {
-id Int @id @default(autoincrement())
-username String @unique
-passwordHash String
-memberships Membership[]
-createdAt DateTime @default(now())
-updatedAt DateTime @updatedAt
-}
+  id           Int          @id @default(autoincrement())
+  username     String       @unique
+  passwordHash String
+  memberships  Membership[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
+  // 👇 motsatt sida till RefreshToken.user
+  refreshTokens RefreshToken[]
+}
 
 model Board {
-id Int @id @default(autoincrement())
-title String
-memberships Membership[]
-createdAt DateTime @default(now())
-updatedAt DateTime @updatedAt
+  id          Int          @id @default(autoincrement())
+  title       String
+  memberships Membership[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
-
 model Membership {
-id Int @id @default(autoincrement())
-user User @relation(fields: [userId], references: [id])
-userId Int
-board Board @relation(fields: [boardId], references: [id])
-boardId Int
-role String @default("member")
+  id      Int    @id @default(autoincrement())
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int
+  board   Board  @relation(fields: [boardId], references: [id])
+  boardId Int
+  role    String @default("member")
 
+  @@unique([userId, boardId])
+}
 
-@@unique([userId, boardId])
+model RefreshToken {
+  // 🟢 matchar din DB: id är integer/autoincrement
+  id        Int      @id @default(autoincrement())
+  // 🟢 kolumnen heter user_id i DB
+  userId    Int      @map("user_id")
+  // 🟢 du lagrar token i klartext i kolumnen "token"
+  token     String
+  // 🟢 tidsstämplar i snake_case i DB
+  issuedAt  DateTime @default(now()) @map("issued_at") @db.Timestamptz(6)
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
